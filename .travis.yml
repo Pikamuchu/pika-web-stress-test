@@ -8,12 +8,10 @@ cache:
   directories:
     - node_modules
 install:
-  - npm install
+  - bash pika install
 script:
-  - ./bin/run --version
-  - ./bin/run --help
-  - npm test
+  - bash pika test
 after_success:
-  - npm run coverage
+  - bash pika coverage
 # - (send to coveralls)
 # - (send to codecov)
