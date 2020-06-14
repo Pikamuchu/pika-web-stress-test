@@ -1,6 +1,6 @@
 {
   "name": "wstress",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Web stress test script",
   "bin": {
     "wstress": "./bin/run"

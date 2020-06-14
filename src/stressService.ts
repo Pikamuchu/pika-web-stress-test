@@ -23,7 +23,10 @@ export default class StressService {
     let testData = [];
     if (url) {
       console.log('* Opening url ' + url);
-      testData.push(url);
+      let c;
+      for (c = 0; c < chunk; c++) {
+        testData.push(url);
+      }
     } else if (dataFile) {
       console.log('* Opening data file ' + dataFile + ' and parsing stress endpoints');
       const testDataFile = await StressUtils.readTestData(dataFile);
@@ -43,9 +46,10 @@ export default class StressService {
         const end = start + chunk < testEndpoints.length ? start + chunk : testEndpoints.length;
         const testUrlChunk = testEndpoints.slice(start, end);
         // Executing test data chunk
-        console.log(`* Processing chunk ${i / chunk} size ${testUrlChunk.length} total processed  ${i}.`);
+        console.log(`* Processing chunk ${1 + (i / chunk)} with ${testUrlChunk.length} concurrent calls.`);
         await this.multiTaskOpenUrl(testUrlChunk);
       }
+      console.log(`* Processed ${i} urls.`);
     }
   }
 
@@ -64,7 +68,7 @@ export default class StressService {
 
   protected openUrl(url: string): Promise<string> {
     // Opening url on headless chrome
-    console.log(`* Opening Url ${url}.`);
+    //console.log(`* Opening Url ${url}.`);
     const endpoint = url.split(' ');
     if (endpoint && endpoint.length == 1) {
       return StressUtils.openEndpoint('GET', endpoint[0]);
