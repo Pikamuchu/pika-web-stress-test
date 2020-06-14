@@ -24,8 +24,7 @@ export default class StressService {
     if (url) {
       console.log('* Opening url ' + url);
       testData.push(url);
-    }
-    if (dataFile) {
+    } else if (dataFile) {
       console.log('* Opening data file ' + dataFile + ' and parsing stress endpoints');
       const testDataFile = await StressUtils.readTestData(dataFile);
       testData.push(...testDataFile);
